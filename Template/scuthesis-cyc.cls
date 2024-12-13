@@ -1,6 +1,6 @@
 % 文件名：scuthesis-cyc.cls
 % 文件描述：以 ctexbook 文档类为基础，定义四川大学学位论文文档类
-% 作者：LegendaryLeo
+% 作者：Yicheng Cai
 % 参考：pkuthss-1.2beta
 % 修改日期：2024年4月6日
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
