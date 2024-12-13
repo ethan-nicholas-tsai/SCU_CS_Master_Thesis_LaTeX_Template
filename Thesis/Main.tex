@@ -1,0 +1,173 @@
+% !TEX program = xelatex
+% 文件名：Main.tex
+% 文件描述：四川大学网络空间安全学院2024研究生硕/博士 LaTeX 模版
+% 作者：Yicheng Cai [xxx@gmail.com]
+% 修改日期：2024年5月26日
+ 
+% 设置文档属性
+% 参数说明
+% professional: 专业学位
+% academic: 学术学位
+% master: 硕士
+% doctor: 博士
+% approval: 送审版本，将不生成声明
+% secret: 保密论文，将显示密级
+% color: 红色川大logo
+% kfont=<⟨none|adobe|fandol|founder|mac|macnew|macold|ubuntu|windows|windowsnew|windowsold|...⟩>，
+% 不填写则默认fandol
+% 送审和答辩用这个
+\documentclass[approval,academic,master,34ch,caption-bi,kfont=windows]{../Template/scuthesis-cyc}
+% 归档用这个
+%\documentclass[academic,master,34ch,caption-bi,kfont=windows]{../Template/scuthesis-cyc}
+\usepackage{pdfpages}  % 插入pdf文档
+% 设置英文字体为Times New Roman
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+%\usepackage{algorithm}
+%\usepackage[ruled,vlined]{algorithm2e} %很难用，且和algorithmic环境冲突
+\usepackage{algorithmic}
+%\usepackage{algpseudocode} %和algorithmic环境冲突
+\captionsetup[algorithm]{font=small}
+ % 如果希望彻底禁止某个浮动体的浮动效果，可以使用 float 宏包提供的 H 位置选项。 https://liam.page/2017/03/11/floats-in-LaTeX-basic/
+\usepackage{float}
+
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{makecell}
+\usepackage{diagbox}
+\usepackage{lscape} % For landscape orientation
+\usepackage{graphicx} % 用于插入图片
+\usepackage{calc} % Needed for the \heightof command
+\usepackage{colortbl} % 用于定义颜色
+\usepackage{array}    % 用于表格布局
+% 如何让表格部分横线加粗，改变表格线宽 https://www.latexstudio.net/archives/698.html
+\makeatletter
+\newcommand{\thickhline}{%
+	\noalign {\ifnum 0=`}\fi \hrule height 1pt
+	\futurelet \reserved@a \@xhline
+}
+\newcolumntype{"}{@{\hskip\tabcolsep\vrule width 1pt\hskip\tabcolsep}}
+\makeatother
+
+%https://zhuanlan.zhihu.com/p/488447829
+\usepackage{longtable} % 引入长表格支持
+%此命令用于调整续表标题的字号，这里默认为11号字体
+%\renewcommand{\small}{\fontsize{11}{11}\selectfont}
+\newcommand{\biaozihao}{\zihao{5}\rm\heiti}
+\newcommand{\biaozihaoeng}{\zihao{5}\rm}
+
+\usepackage{xcolor}   % 用于文本和背景颜色
+\usepackage{subcaption}
+\usepackage{epstopdf}
+\usepackage{threeparttable}
+\usepackage{colortbl}
+\usepackage{pgf}
+
+\newcommand*{\nicebar}[1]{\,\overline{#1}\,}
+
+\definecolor{DarkRed}{RGB}{255, 180, 183}
+\definecolor{LightRed}{RGB}{255, 232, 234}
+\definecolor{DarkGreen}{RGB}{181, 224, 174}
+\definecolor{LightGreen}{RGB}{231, 244, 228}
+% 确保\newcommand在文档开始或任何文本内容之前定义
+\newcommand{\colorForValue}[1]{%
+	\pgfmathparse{int(#1< -0.12 ? 1 : (#1 < 0 ? 2 : (#1 < 0.12 ? 3 : 4)))}% 更正：添加int以确保结果为整数
+	\ifcase\pgfmathresult\relax
+	%	\or \cellcolor{red!30}% 浅红
+	%	\or \cellcolor{red!15}% 淡红
+	%	\or \cellcolor{green!15}% 淡绿
+	%	\or \cellcolor{green!30}% 淡绿
+	\or \cellcolor{DarkRed}% 浅绿
+	\or \cellcolor{LightRed}% 浅绿
+	\or \cellcolor{LightGreen}% 浅绿
+	\or \cellcolor{DarkGreen}% 浅绿
+	\fi
+}
+
+\begin{document}
+	% 设置文档信息
+	\unitid{10610} % 单位代码
+	\STUnumber{202x2262400xx} % 学号或送审编号
+	\securityClassification{秘密} % 密级：公开/内部/秘密/机密/绝密。当不使用secret时，不显示
+	\securityYear{3} % 保密年限
+	\CoverTitle{论文标题第一行} %封面标题
+	\CoverSubTitle{论文标题第二行} %可做封面副标题
+	\title{论文标题全称} % 论文全称
+	\AbstractTitle{ 论文标题全称} %摘要标题
+	%\ENGtitle{Research on Virtual Agent Identity Shaping and Personality Mimicking on Social Networks} %论文全称英文
+	\ENGtitle{Full Thesis Title} %论文全称英文
+	% \school{\zihao{5}{这里是特别长的单位名称甚至一行不能显示}} % 如果太长超出一行，可以根据显示效果修改字号，这里为5号字
+	\school{四川大学网络空间安全学院} % 培养单位
+	\ENGschool{School of Cyber Science and Engineering} % 培养单位英文
+	\author{你的名字} % 作者姓名
+	\ENGauthor{First Name Last Name} % 作者英文名
+	\supervisor{贵导师} % 指导教师
+	\ENGsupervisor{Prof. First Name Last Name} % 指导教师英文
+	\degreeclass{学术硕士} % 学位类别
+	\ENGdegreeclass{Master of Engineering} % 学位类别英文
+	\major{网络空间安全} % 学科专业或领域名称
+	\ENGmajor{Cybersecurity} % 学科专业或领域名称英文
+	\hasmajor{1} % 若有领域则为1，否则改为0
+	\defensedate{二〇二啥年啥月} % 论文答辩时间
+	\grantdate{二〇二啥年啥月} % 学位授予时间
+	\accomplishdate{二〇二啥年啥月} % 论文完成时间
+	\statementdate{Month, 202x} % 声明时间
+	\direction{查询录取方向}
+	\ENGdirection{Information Content Security}
+	\keywords{关键词 1$\quad$关键词 2$\quad$关键词 3$\quad$关键词 4$\quad$关键词 5}
+	\ENGkeywords{Keyword one; Keyword two; Keyword three; Keyword four; Keyword five}
+	
+	% 自动制作封面
+	\maketitle
+	% 手动制作封面并插入
+%	\includepdf[pages={1}]{封面-16开-优化.pdf}
+%	\includepdf[pages={1}]{封面-16开-存档.pdf}
+	% 自动制作中英文声明
+	%	\makestatement
+	% 设置论文正文前的页码、页眉等
+	\frontmatter\pagenumbering{Roman}\pagestyle{fancy}
+	% 包含摘要
+	\include{Chapters/0_0_Abstract}
+	% 自动制作目录
+	\maketoc
+	% 自动制作图表目录
+	\makefigtablist
+	% 包含缩略词表
+	%\include{Chapters/0_1_Abbreviations}
+	% 包含符号表
+	%\include{Chapters/0_2_Symbols}
+	% 设置论文正文部分的页码、页眉等
+	\mainmatter\pagenumbering{arabic}\pagestyle{fancy}
+	% 清除双数页 https://www.zhihu.com/question/266237548/answer/2691013672
+	\let\cleardoublepage\clearpage
+	% 包含第一章、第二章等等
+	\include{Chapters/1_Introduction}
+	\include{Chapters/2_RelatedTechs}
+	\include{Chapters/3_Research1}
+	\include{Chapters/4_Research2}
+	\include{Chapters/5_Research3}
+	\include{Chapters/6_Conclusion}
+	
+	% 设置论文正文后的式样
+	\backmatter
+	% 按国标自动制作参考文献
+	% 参考文献数据文件为本目录下的Reference.bib
+	\begin{reference}
+		\bibliographystyle{gbt7714-numerical}
+		\bibliography{Reference}
+	\end{reference}
+	% 包含在读期间科研成果
+	\include{Chapters/Achievements}
+	%\makethanks
+	% 包含致谢
+	\include{Chapters/Thanks}
+	%\makestatement
+	% 包含论文原创性声明(请勿修改)
+	\include{Chapters/OriginalStatement}
+	% 包含论文版权授权书(请勿修改)
+	\include{Chapters/CopyrightAuthorization}
+\end{document}
